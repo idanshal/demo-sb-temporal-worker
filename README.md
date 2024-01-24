@@ -1,1 +1,1 @@
-# demo-sb-temporal-workflow-starter
+# demo-sb-temporal-worker
