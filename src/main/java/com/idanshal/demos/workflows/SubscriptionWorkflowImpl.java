@@ -1,6 +1,6 @@
-package com.temporal.demos.temporalspringbootdemo.workflows;
+package com.idanshal.demos.workflows;
 
-import com.temporal.demos.temporalspringbootdemo.activities.SubscriptionActivity;
+import com.idanshal.demos.activities.SubscriptionActivity;
 import io.temporal.activity.ActivityOptions;
 import io.temporal.failure.CanceledFailure;
 import io.temporal.spring.boot.WorkflowImpl;

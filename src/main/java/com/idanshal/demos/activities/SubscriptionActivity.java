@@ -1,4 +1,4 @@
-package com.temporal.demos.temporalspringbootdemo.activities;
+package com.idanshal.demos.activities;
 
 import io.temporal.activity.ActivityInterface;
 

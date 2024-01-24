@@ -6,12 +6,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
-    <groupId>com.temporal.demos</groupId>
-    <artifactId>demo-worker</artifactId>
+    <groupId>com.idanshal.demos</groupId>
+    <artifactId>demo-db-temporal-worker</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <description>Temporal Spring Boot Demo</description>
     <properties>
         <java.version>21</java.version>
         <version.temporal>1.22.3</version.temporal>
@@ -30,25 +29,17 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Temporal -->
         <dependency>
             <groupId>io.temporal</groupId>
             <artifactId>temporal-spring-boot-starter-alpha</artifactId>
             <version>${version.temporal}</version>
         </dependency>
-        <!-- Metrics -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

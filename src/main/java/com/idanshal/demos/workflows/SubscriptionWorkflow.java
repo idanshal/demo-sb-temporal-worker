@@ -1,4 +1,4 @@
-package com.temporal.demos.temporalspringbootdemo.workflows;
+package com.idanshal.demos.workflows;
 
 import io.temporal.workflow.SignalMethod;
 import io.temporal.workflow.WorkflowInterface;

@@ -2,7 +2,7 @@ server:
   port: 8082
 spring:
   application:
-    name: demo-worker
+    name: demo-sb-temporal-worker
   temporal:
     namespace: ${namespace:default}
     connection:
@@ -19,7 +19,7 @@ spring:
       max-instances: 10
       max-threads: 10
     workersAutoDiscovery:
-      packages: com.temporal.demos
+      packages: com.idanshal.demos
   sql:
     init:
       platform: postgres

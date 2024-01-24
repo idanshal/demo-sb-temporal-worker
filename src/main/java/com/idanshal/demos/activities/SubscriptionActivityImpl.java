@@ -1,8 +1,6 @@
-package com.temporal.demos.temporalspringbootdemo.activities;
+package com.idanshal.demos.activities;
 
 import io.temporal.spring.boot.ActivityImpl;
-import io.temporal.workflow.Workflow;
-import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
