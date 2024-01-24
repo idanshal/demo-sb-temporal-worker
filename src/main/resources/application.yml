@@ -1,0 +1,26 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: demo-worker
+  temporal:
+    namespace: ${namespace:default}
+    connection:
+      target: ${temporal-frontend:127.0.0.1:7233}
+    workers:
+      - task-queue: "SubscriptionTaskQueue"
+        capacity:
+          max-concurrent-workflow-task-pollers: 6
+          max-concurrent-activity-task-pollers: 6
+        rate-limits:
+          max-worker-activities-per-second: 0
+          max-task-queue-activities-per-second: 0
+    workflow-cache:
+      max-instances: 10
+      max-threads: 10
+    workersAutoDiscovery:
+      packages: com.temporal.demos
+  sql:
+    init:
+      platform: postgres
+      mode: always
