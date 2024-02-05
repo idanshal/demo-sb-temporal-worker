@@ -1,6 +1,7 @@
 package com.idanshal.demos.workflows;
 
 import com.idanshal.demos.activities.SubscriptionActivity;
+import com.idanshal.demos.common.workflows.SubscriptionWorkflow;
 import io.temporal.activity.ActivityOptions;
 import io.temporal.failure.CanceledFailure;
 import io.temporal.spring.boot.WorkflowImpl;

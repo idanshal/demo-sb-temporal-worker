@@ -8,5 +8,4 @@ public interface SubscriptionActivity {
     void upgradeFromTrialToPaid(String customerIdentifier);
     void chargeMonthlyFee(String customerIdentifier);
     void processSubscriptionCancellation(String customerIdentifier);
-
 }
