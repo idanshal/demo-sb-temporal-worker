@@ -21,15 +21,16 @@ public class SubscriptionActivityImpl implements SubscriptionActivity {
     @SneakyThrows
     public void onboardToFreeTrial(String customerIdentifier) {
         log.info("Onboarding customer to free trial: {}", customerIdentifier);
-        Subscription subscription = subscriptionRepository.findById(customerIdentifier).orElseThrow(() -> new IllegalArgumentException("Subscription not found"));
+        Subscription subscription = getSubscriptionByCustomerId(customerIdentifier);
         subscription.setSubscriptionType(SubscriptionType.TRIAL);
+        subscription.setActive(true);
         subscriptionRepository.save(subscription);
     }
 
     @Override
     public void upgradeFromTrialToPaid(String customerIdentifier) {
         log.info("Upgrading customer from trial to paid: {}", customerIdentifier);
-        Subscription subscription = subscriptionRepository.findById(customerIdentifier).orElseThrow(() -> new IllegalArgumentException("Subscription not found"));
+        Subscription subscription = getSubscriptionByCustomerId(customerIdentifier);
         subscription.setSubscriptionType(SubscriptionType.PAID);
         subscriptionRepository.save(subscription);
     }
@@ -42,5 +43,12 @@ public class SubscriptionActivityImpl implements SubscriptionActivity {
     @Override
     public void processSubscriptionCancellation(String customerIdentifier) {
         log.info("Processing subscription cancellation for customer: " + customerIdentifier);
+        Subscription subscription = getSubscriptionByCustomerId(customerIdentifier);
+        subscription.setActive(false);
+        subscriptionRepository.save(subscription);
+    }
+
+    private Subscription getSubscriptionByCustomerId(String customerIdentifier) {
+        return subscriptionRepository.findById(customerIdentifier).orElseThrow(() -> new IllegalArgumentException("Subscription not found"));
     }
 }

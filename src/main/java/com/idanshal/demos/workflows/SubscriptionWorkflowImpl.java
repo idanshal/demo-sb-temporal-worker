@@ -23,17 +23,19 @@ public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
     private final SubscriptionActivity subscriptionActivity = Workflow.newActivityStub(SubscriptionActivity.class,
             ActivityOptions.newBuilder().setStartToCloseTimeout(Duration.ofSeconds(20)).build());
 
+    private int paymentCount = 0;
     @Override
     public void execute(String customerIdentifier) {
         try {
             subscriptionActivity.onboardToFreeTrial(customerIdentifier);
             Workflow.sleep(Duration.ofSeconds(TRAIL_SUBSCRIPTION_PERIOD));
-            logger.info("Trail subscription period is over! awaiting user approval for paid subscription");
+            logger.info("Trail subscription period is over! awaiting user approval for paid subscription. customerId: {}", customerIdentifier);
             Workflow.await(() -> upgradeApproved);
             subscriptionActivity.upgradeFromTrialToPaid(customerIdentifier);
             while (true) {
                 Workflow.sleep(Duration.ofSeconds(PAID_SUBSCRIPTION_CHARGE_PERIOD));
                 subscriptionActivity.chargeMonthlyFee(customerIdentifier);
+                paymentCount++;
             }
         } catch (CanceledFailure e) {
             CancellationScope detached = Workflow.newDetachedCancellationScope(() ->
@@ -46,5 +48,10 @@ public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
     @Override
     public void approveUpgrade() {
         upgradeApproved = true;
+    }
+
+    @Override
+    public int getPaymentCount() {
+        return paymentCount;
     }
 }
