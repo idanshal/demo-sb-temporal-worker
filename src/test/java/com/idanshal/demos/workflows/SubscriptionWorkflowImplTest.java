@@ -1,19 +1,13 @@
 package com.idanshal.demos.workflows;
 
-import com.idanshal.demos.common.workflows.SubscriptionWorkflow;
 import com.idanshal.demos.common.workflows.SubscriptionWorkflow2;
 import io.temporal.client.WorkflowClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.ParameterizedTypeReference;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SubscriptionWorkflowImplTest {
@@ -31,6 +25,8 @@ class SubscriptionWorkflowImplTest {
         workflowDetails.setWorkflowArgs(List.of("123"));
         workflowHelper.executeAsyncWorkflowAndWait(workflowDetails);
     }
+
+    // QUESTION FOR YANIV #1 : I can't get this to work for some reason!
 
 //    @Test
 //    void example2() {

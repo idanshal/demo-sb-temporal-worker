@@ -16,10 +16,11 @@ public class WorkflowHelper {
     private final WorkflowClient workflowClient;
 
     @SneakyThrows
-    public <T, R> void executeAsyncWorkflowAndWait(WorkflowDetails<T, R> workflowDetails) {
+    public <T, R> R executeAsyncWorkflowAndWait(WorkflowDetails<T, R> workflowDetails) {
         WorkflowStub workflowStub = startWorkflow(workflowDetails);
         Class<?> resultClass = workflowDetails.getResultClass() != null ? workflowDetails.getResultClass() : Void.class;
-        waitForResult(workflowStub, resultClass);
+        // QUESTION FOR YANIV #2 : why can't I just return waitForResult? Does casting to R make sense?
+        return (R)waitForResult(workflowStub, resultClass);
     }
 
     public <T, R> WorkflowStub startWorkflow(WorkflowDetails<T, R> workflowDetails) {
@@ -34,11 +35,12 @@ public class WorkflowHelper {
         return workflowStub;
     }
 
-    public <R> void waitForResult(WorkflowStub workflowStub, Class<R> resultClass) {
+    public <R> R waitForResult(WorkflowStub workflowStub, Class<R> resultClass) {
         try {
-            workflowStub.getResult(resultClass);
+            return workflowStub.getResult(resultClass);
         } catch (Exception e) {
             log.error(e.getMessage());
+            return null;
         }
     }
 
