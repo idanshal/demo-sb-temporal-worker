@@ -26,7 +26,11 @@ public class WorkflowHelper {
         WorkflowOptions workflowOptions = buildWorkflowOptions(workflowDetails);
         T wfStubClass = workflowClient.newWorkflowStub(workflowDetails.getWfClass(), workflowOptions);
         WorkflowStub workflowStub = WorkflowStub.fromTyped(wfStubClass);
-        workflowStub.start(workflowDetails.getWorkflowArgs().toArray());
+        if (workflowDetails.getWorkflowArgs()!=null) {
+            workflowStub.start(workflowDetails.getWorkflowArgs().toArray());
+        } else {
+            workflowStub.start();
+        }
         return workflowStub;
     }
 
