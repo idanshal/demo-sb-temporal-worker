@@ -18,9 +18,7 @@ public class WorkflowHelper {
     @SneakyThrows
     public <T, R> R executeAsyncWorkflowAndWait(WorkflowDetails<T, R> workflowDetails) {
         WorkflowStub workflowStub = startWorkflow(workflowDetails);
-        Class<?> resultClass = workflowDetails.getResultClass() != null ? workflowDetails.getResultClass() : Void.class;
-        // QUESTION FOR YANIV #2 : why can't I just return waitForResult? Does casting to R make sense?
-        return (R)waitForResult(workflowStub, resultClass);
+        return waitForResult(workflowStub, workflowDetails.getResultClass());
     }
 
     public <T, R> WorkflowStub startWorkflow(WorkflowDetails<T, R> workflowDetails) {

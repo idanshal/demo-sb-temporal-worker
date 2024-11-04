@@ -26,8 +26,7 @@ class SubscriptionWorkflowImplTest {
         workflowHelper.executeAsyncWorkflowAndWait(workflowDetails);
     }
 
-    // QUESTION FOR YANIV #1 : I can't get this to work for some reason!
-
+    // QUESTION FOR YANIV : I can't get this to work for some reason!
 //    @Test
 //    void example2() {
 //        WorkflowHelper workflowHelper = new WorkflowHelper(workflowClient);
@@ -43,8 +42,7 @@ class SubscriptionWorkflowImplTest {
 //                        .resultClass((Class<Map<String, Integer>>)((ParameterizedType) parameterizedTypeReference.getType()).getRawType())
 //                        .build();
 //
-//        workflowHelper.executeAsyncWorkflowAndWait(workflowDetails);
+//        Map<String, Integer> result = workflowHelper.executeAsyncWorkflowAndWait(workflowDetails);
+//        assertThat(result).isEqualTo(Map.of("customerId", "123"));
 //    }
-
-
 }
